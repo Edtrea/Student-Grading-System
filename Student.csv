@@ -1,0 +1,3 @@
+EnrolmentType,StudentID,FirstName,LastName,BirthDay,BirthMonth,BirthYear
+U,1001,test,1,4,2,2012
+G,1002,testing,2,12,8,2005
