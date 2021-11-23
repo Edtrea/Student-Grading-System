@@ -1,0 +1,14 @@
+StudentID,EnrolmentType,Name,BirthDate,UnitID,OverallMark,GraduateType,FinalGrade
+1000,U,student twelve,29/4/2004,,,,
+1001,U,student one,4/2/2012,,,,
+2001,U,student two,12/8/2005,ICT167,57.0,,P
+2701,U,student ten,8/5/2000,ICT167,57.0,,P
+2702,U,student eleven,8/3/2001,,,Master,N
+3001,U,student three,21/5/2003,ICT167,66.1,,C
+4001,U,student four,21/5/2003,,,,
+5001,U,student five,21/5/2003,,,,
+6001,U,student Six,21/3/2003,,,,
+7001,U,student Seven,21/5/2004,,,,
+8001,U,student Eight,21/5/2003,,,,
+9001,U,student Nine,12/6/2002,,,,
+9002,U,student Nine,12/6/2002,,,,

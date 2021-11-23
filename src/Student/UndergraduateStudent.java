@@ -1,33 +1,42 @@
+//SGS
+//Lim Wen Chao
+//23.11.2021
+//UndergraduateStudent.java
+//This is a UndergraduateStudent class is a sub class of student that holds UndergraduateStudent data and has a reportgrade function that will return a string with Undergraduate student's information
+
 package Student;
 
 import Helper.Date;
 import Unit.UndergraduateUnit;
-import Unit.Unit;
 
-public class UndergraduateStudent extends Student {
+public class UndergraduateStudent extends Student { //Inheritance
     private char enrolmentType = 'U';
 
-    //Constructors
-    public UndergraduateStudent()
-    {
+    // Constructors
+    public UndergraduateStudent() {
         super();
     }
-    public UndergraduateStudent(Long studentId, String firstName, String lastName, Date birthDate)
-    {
+    public UndergraduateStudent(Long studentId, String firstName, String lastName, Date birthDate) {
         super(studentId, firstName, lastName, birthDate);
     }
 
-    //Getter
-    public char GetEnrolmentType()
-    {
+    // Getter
+    /** 
+     * A method that returns a graduate student's enrolmentType
+     * @return char The enrolmentType of student
+     */
+    public char GetEnrolmentType() {
         return enrolmentType;
     }
 
-    //Other methods
-    public String ReportGrade()
-    {
-        StringBuilder string  = new StringBuilder();
-        
+    // Other methods
+    /** 
+     * A method that build a string that contains the information of an undergraduate student and returns it
+     * @return String   A string that that contains student's information
+     */
+    public String ReportGrade() {
+        StringBuilder string = new StringBuilder();
+
         string.append("Student type: ");
         string.append(enrolmentType);
         string.append("\n");
@@ -39,8 +48,7 @@ public class UndergraduateStudent extends Student {
         string.append("Student ID: ");
         string.append(super.GetStudentID());
         string.append("\n");
-        if(super.GetUnit() != null)
-        {
+        if (super.GetUnit() != null) {
             string.append("Unit ID: ");
             string.append(((UndergraduateUnit) super.GetUnit()).GetUnitId());
             string.append("\n");
@@ -65,9 +73,7 @@ public class UndergraduateStudent extends Student {
             string.append("Final grade: ");
             string.append(((UndergraduateUnit) super.GetUnit()).CalFinalGrade());
             string.append("\n");
-        }
-        else
-        {
+        } else {
             string.append("No unit/marks information found.");
             string.append("\n");
         }

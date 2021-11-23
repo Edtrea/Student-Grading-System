@@ -1,3 +1,9 @@
+//SGS
+//Lim Wen Chao
+//23.11.2021
+//Client.java
+//The file where the main logic and processes are initiated and outputted
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,6 +21,12 @@ import Helper.Date;
 import Exceptions.*;
 
 public class Client {
+    
+    /** 
+     * The main method of SGS. Handles all functions and processes and will call other methods/classes/objects as needed
+     * @param args Default required parameter for main
+     * @throws Exception To indicate method will throw exception
+     */
     public static void main(String[] args) throws Exception {
         // Declare variables
         ArrayList<Student> studentList = new ArrayList<Student>();
@@ -26,7 +38,8 @@ public class Client {
         studentList = LoadStudentInfo(studentFileName);
         // Checks if array are filled with any data
         if (studentList == null) {
-            System.out.println("Error encountered when loading student data.Please fix issue before attempting to load again.\n");
+            System.out.println(
+                    "Error encountered when loading student data.Please fix issue before attempting to load again.\n");
         } else if (studentList.isEmpty()) {
             System.out.println("No student data are found.Please check Student.csv.\n");
         } else {
@@ -149,7 +162,14 @@ public class Client {
 
     }
 
-    static ArrayList<Student> LoadStudentInfo(String fileName) {
+    
+    /** 
+     * A method that will handle loading of student data from CSV file into arraylist of student Object
+     * It will check data in CSV and make sure it conforms to pre-determined data type and values only
+     * @param fileName The CSV file name includes the file type as well
+     * @return ArrayList<Student> Returns an arraylist of Student objects after loading student data from CSV file
+     */
+    private static ArrayList<Student> LoadStudentInfo(String fileName) {
         // Declare variables
         ArrayList<Student> studentList = new ArrayList<>();
         String line = null;
@@ -169,18 +189,15 @@ public class Client {
                 // Check if dates are int and StudentId is long
                 if (CheckType.IsInt(split[4]) == true && CheckType.IsInt(split[5]) == true
                         && CheckType.IsInt(split[6]) == true && CheckType.IsLong(split[1])) {
-                    
-                    //Check if dates have accpetable date values
-                    if(CheckDate.CheckYear(Integer.parseInt(split[6])) == false)
-                    {
+
+                    // Check if dates have accpetable date values
+                    if (CheckDate.CheckYear(Integer.parseInt(split[6])) == false) {
                         throw new InvalidDateException("Invalid year: " + split[6]);
                     }
-                    if(CheckDate.CheckMonth(Integer.parseInt(split[5])) == false)
-                    {
+                    if (CheckDate.CheckMonth(Integer.parseInt(split[5])) == false) {
                         throw new InvalidDateException("Invalid month: " + split[5]);
                     }
-                    if(CheckDate.CheckDay(Integer.parseInt(split[4])) == false)
-                    {
+                    if (CheckDate.CheckDay(Integer.parseInt(split[4])) == false) {
                         throw new InvalidDateException("Invalid day: " + split[4]);
                     }
 
@@ -220,7 +237,8 @@ public class Client {
         return null;
     }
 
-    static void DisplayMenu() {
+    //A method that prints out the functions menu of SGS
+    private static void DisplayMenu() {
         // Display menu
         System.out.println("1) Quit system.");
         System.out.println("2) Load student marks information (Require CSV file).");
@@ -235,6 +253,14 @@ public class Client {
         System.out.println("Enter number 1-8 to select a function.");
     }
 
+    
+    /** 
+     * This method will load marks data into corresponding student objects by studentId
+     * Enrolment type of student must be identical with enrolment type of marks data
+     * It will also check other data in CSV and makre sure it conforms to pre-determined data type and values only
+     * @param tempInput The file name including the file type provided by the user
+     * @param studentList The arraylist of student object that was created at the start of the program
+     */
     static void LoadStudentMarks(String tempInput, ArrayList<Student> studentList) {
         int studentIndex = -1;
 
@@ -283,51 +309,51 @@ public class Client {
 
                 // Check where marks is for Undergraduate/Graduate
                 if (split[0].equals("U")) {
-                    //Check Data
-                    if(CheckUnit.CheckLevel(split[3]) == false) //Check unitlevel
+                    // Check Data
+                    if (CheckUnit.CheckLevel(split[3]) == false) // Check unitlevel
                     {
-                        throw new WrongDataTypeException("Unit Level data type not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else if(CheckUnit.CheckAssignmentExam(split[4]) == false) //Assignment1
+                        throw new WrongDataTypeException("Unit Level data type not accepted for student " + split[1]
+                                + ". Kindly check data dictionary provided.");
+                    } else if (CheckUnit.CheckAssignmentExam(split[4]) == false) // Assignment1
                     {
-                        throw new WrongDataTypeException("Assignment 1 data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else if(CheckUnit.CheckAssignmentExam(split[5]) == false) //Assignment2
+                        throw new WrongDataTypeException("Assignment 1 data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else if (CheckUnit.CheckAssignmentExam(split[5]) == false) // Assignment2
                     {
-                        throw new WrongDataTypeException("Assignment 2 data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else if(CheckUnit.CheckPractical(split[6]) == false)//Practical work
+                        throw new WrongDataTypeException("Assignment 2 data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else if (CheckUnit.CheckPractical(split[6]) == false)// Practical work
                     {
-                        throw new WrongDataTypeException("Practical work data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else if(CheckUnit.CheckAssignmentExam(split[7]) == false) //Final Exam
+                        throw new WrongDataTypeException("Practical work data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else if (CheckUnit.CheckAssignmentExam(split[7]) == false) // Final Exam
                     {
-                        throw new WrongDataTypeException("Final Exam data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else 
-                    {
+                        throw new WrongDataTypeException("Final Exam data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else {
                         // Create Unit
-                        Unit tempUnit = new UndergraduateUnit(split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), Integer.parseInt(split[5]), Integer.parseInt(split[6]), Integer.parseInt(split[7]));
+                        Unit tempUnit = new UndergraduateUnit(split[2], Integer.parseInt(split[3]),
+                                Integer.parseInt(split[4]), Integer.parseInt(split[5]), Integer.parseInt(split[6]),
+                                Integer.parseInt(split[7]));
 
                         // Load unit into student
                         studentList.get(studentIndex).SetUnit(tempUnit);
                     }
                 } else if (split[0].equals("G")) {
-                    //Check data
-                    if(CheckUnit.CheckGradEnrolmentType(split[8]) == false) //Graduate type
+                    // Check data
+                    if (CheckUnit.CheckGradEnrolmentType(split[8]) == false) // Graduate type
                     {
-                        throw new WrongDataTypeException("GradEnrolType data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else if (CheckUnit.CheckYears(split[9]) == false) //Years required
+                        throw new WrongDataTypeException("GradEnrolType data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else if (CheckUnit.CheckYears(split[9]) == false) // Years required
                     {
-                        throw new WrongDataTypeException("GradYears data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else if (CheckUnit.CheckGrade(split[10]) == false) //final grade
+                        throw new WrongDataTypeException("GradYears data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else if (CheckUnit.CheckGrade(split[10]) == false) // final grade
                     {
-                        throw new WrongDataTypeException("GradFinalGrade data type/value not accepted for student " + split[1] + ". Kindly check data dictionary provided.");
-                    }
-                    else 
-                    {
+                        throw new WrongDataTypeException("GradFinalGrade data type/value not accepted for student "
+                                + split[1] + ". Kindly check data dictionary provided.");
+                    } else {
                         // Create Unit
                         Unit tempUnit = new GraduateUnit(split[8], Integer.parseInt(split[9]), split[10].charAt(0));
 
@@ -360,8 +386,17 @@ public class Client {
         }
     }
 
+    
+    /** 
+     * The method will search through arrayList for a student by student Id when provided with an ID by the user
+     * @param studentList   ArrayList of student objects
+     * @param id    Student ID of student provided by user to find
+     * @return int  returns the index of the student found in ArrayList
+     */
     static int SearchStudentById(ArrayList<Student> studentList, Long id) {
+        //Loop arraylist
         for (int i = 0; i < studentList.size(); i++) {
+            //If Id matches
             if (studentList.get(i).Equals(id)) {
                 return i;
             }
@@ -370,35 +405,57 @@ public class Client {
         return -1;
     }
 
+    
+    /** 
+     * A method that will return a student's details as a string ready for output when provided with the index position of the student's object found in Student arrayList
+     * @param studentList   An arrayList of student Object
+     * @param index An int representing the index of an array
+     * @return String   The student's data returned as a string
+     */
     static String DisplayStudentDetails(ArrayList<Student> studentList, int index) {
         // Get student Info
         return studentList.get(index).ReportGrade();
     }
 
+    
+    /** 
+     * A method that will return all students' details as a string ready for output when provided with an arraylist of Student
+     * @param studentList   An arrayList of student objects
+     * @return String   Students' data returned as a string
+     */
     static String DisplayStudentDetails(ArrayList<Student> studentList) {
         try {
             StringBuilder builder = new StringBuilder();
+            //Loop through arraylist
             for (int i = 0; i < studentList.size(); i++) {
-                // Get student Info
+                // Get student Info and build string
                 builder.append(studentList.get(i).ReportGrade());
                 builder.append("\n");
             }
             return builder.toString();
         } catch (NullPointerException e) {
             System.out.println(e);
-        } 
+        }
         return "";
 
     }
 
+    
+    /** 
+     * Method that will calculate the average score of all undergraduate student and retuns the average score
+     * @param studentList   An arrayList of student objects
+     * @return double   The average score of all undergraduate students
+     */
     static double CalAverageScore(ArrayList<Student> studentList) {
         double totalScore = 0;
         int count = 0;
+        //Loops through array
         for (int i = 0; i < studentList.size(); i++) {
+            //Check if student is undergraduate
             if (studentList.get(i).GetEnrolmentType() == 'U') {
                 UndergraduateUnit tempU = (UndergraduateUnit) studentList.get(i).GetUnit();
-                if(tempU != null)
-                {
+                //Check if student have marks data
+                if (tempU != null) {
                     totalScore += tempU.CalOverallMark();
                     count++;
                 }
@@ -407,14 +464,22 @@ public class Client {
         return totalScore / count;
     }
 
+    
+    /** 
+     * A method that will calculate how many undergraduate students among all undergraduate students acquired a overall marks that is equal or above the average
+     * @param studentList   An arrayList of student Object
+     * @param average   The average score of all undergraduate student
+     * @return int  The number of undergraduate students that obtained a overall marks that is equal or above average
+     */
     static int CalNumAboveAverage(ArrayList<Student> studentList, double average) {
         int count = 0;
-
+        //loop through arraylist
         for (int i = 0; i < studentList.size(); i++) {
+            //Check if student is undergraduate
             if (studentList.get(i).GetEnrolmentType() == 'U') {
                 UndergraduateUnit tempU = (UndergraduateUnit) studentList.get(i).GetUnit();
-                if(tempU != null)
-                {
+                //Check if student has marks data
+                if (tempU != null) {
                     if (tempU.CalOverallMark() >= average) {
                         count++;
                     }
@@ -425,14 +490,22 @@ public class Client {
         return count;
     }
 
+    
+    /** 
+     * A method that will calculate how many undergraduate students among all undergraduate students acquired a overall marks that is below average
+     * @param studentList An arrayList of student object
+     * @param average   The average score of all undergraduate student
+     * @return int  The number of undergraduate students that obtained a overall marks that is below average 
+     */
     static int CalNumBelowAverage(ArrayList<Student> studentList, double average) {
         int count = 0;
-
+        //Loops through arrayList
         for (int i = 0; i < studentList.size(); i++) {
+            //Check if student is undergraduate
             if (studentList.get(i).GetEnrolmentType() == 'U') {
                 UndergraduateUnit tempU = (UndergraduateUnit) studentList.get(i).GetUnit();
-                if(tempU != null)
-                {
+                //Check if student has marks data
+                if (tempU != null) {
                     if (tempU.CalOverallMark() < average) {
                         count++;
                     }
@@ -443,6 +516,13 @@ public class Client {
         return count;
     }
 
+    
+    /** 
+     * A method that will build the string that will be displayed to user for function 5
+     * @param aboveA    The number of undergraduate students that obtained a overall marks that is equal or above average
+     * @param belowA    The number of undergraduate students that obtained a overall marks that is below average 
+     * @return String   returns the string to be displayed to user
+     */
     static String DisplayNumAverage(int aboveA, int belowA) {
         StringBuilder builder = new StringBuilder();
 
@@ -456,22 +536,33 @@ public class Client {
         return builder.toString();
     }
 
+    
+    /** 
+     * A method that will sort an arraylist of students by student ID in ascending order and return boolean depending on whether the sorting was successful
+     * @param studentList   An arrayList of student objects
+     * @return boolean  true/false depending on success of sorting
+     */
     static boolean SortStudentList(ArrayList<Student> studentList) {
         // SelectionSort
-        // will iterate throughout the entire list to sort
         try {
+            //Loops through list of students
             for (int i = 0; i < studentList.size() - 1; i++) {
                 int lowestValue = i;
                 // will iterate through list to find next smallest value
                 for (int j = i + 1; j < studentList.size(); j++) {
+                    //Comparing if student[i] is smaller than student[j]
+                    //If J is smaller than set lowest value to j
                     if (studentList.get(j).GetStudentID().compareTo(studentList.get(lowestValue).GetStudentID()) < 0) {
                         lowestValue = j;
                     }
                 }
 
                 // swap out the next lowest value with the next value in the list
+                //Stores student[i] in a temp object to be put back later
                 Student tempStudent = studentList.get(i);
+                //Set student[j] to student[i]'s position. If lowestValue did not change, then [i] will be set to [i] and nothing changes
                 studentList.set(i, studentList.get(lowestValue));
+                //Put the temp student object back to the original position of [j]. If lowestValue did not change, then [i] will be set to [i] and nothing changes
                 studentList.set(lowestValue, tempStudent);
             }
             // return true to indicate array had been sorted
@@ -482,6 +573,11 @@ public class Client {
 
     }
 
+    
+    /** 
+     * An method that will build and write to CSV student information data
+     * @param studentList An arrayList of student objects
+     */
     static void WriteSortedStudentInfoToCSV(ArrayList<Student> studentList) {
         String outFileName = "SortedStudentList.csv";
         PrintWriter writer = null;
@@ -495,6 +591,7 @@ public class Client {
 
             // Append student info
             for (int i = 0; i < studentList.size(); i++) {
+                //Check if student is undergraduate or graduate
                 if (studentList.get(i).GetEnrolmentType() == 'U') {
                     UndergraduateUnit tempU = (UndergraduateUnit) studentList.get(i).GetUnit();
 
@@ -506,8 +603,8 @@ public class Client {
                     builder.append(",");
                     builder.append(studentList.get(i).GetBirthDate().getFullDate());// BirthDate
                     builder.append(",");
-                    if(tempU != null)
-                    {
+                    //Checks if unit object is found in student object
+                    if (tempU != null) {
                         builder.append(tempU.GetUnitId());// UnitID
                         builder.append(",");
                         builder.append(tempU.CalOverallMark());// OverallMarks
@@ -515,16 +612,14 @@ public class Client {
                         // No Graduate type for undergraduate
                         builder.append(",");
                         builder.append(tempU.CalFinalGrade());// FinalGrade
-                    }
-                    else
-                    {
-                        //No UnitID
+                    } else {
+                        // No UnitID
                         builder.append(",");
-                        //No OverallMarks
+                        // No OverallMarks
                         builder.append(",");
                         // No Graduate type for undergraduate
                         builder.append(",");
-                        //No FinalGrade
+                        // No FinalGrade
                     }
 
                     builder.append("\n");
@@ -543,17 +638,15 @@ public class Client {
                     builder.append(",");
                     // No OverallMarks for graduate
                     builder.append(",");
-                    if(tempU != null)
-                    {
+                    //Checks if unit object is found in student object
+                    if (tempU != null) {
                         builder.append(tempU.GetGradEnrolmentType());// Graduate type
                         builder.append(",");
                         builder.append(tempU.GetFinalGrade());// FinalGrade
-                    }
-                    else 
-                    {
-                        //No Graduate type
+                    } else {
+                        // No Graduate type
                         builder.append(",");
-                        //No FinalGrade
+                        // No FinalGrade
                     }
 
                     builder.append("\n");

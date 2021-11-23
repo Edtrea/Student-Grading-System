@@ -1,16 +1,20 @@
+//SGS
+//Lim Wen Chao
+//23.11.2021
+//UndergraduateUnit.java
+//This is a UndergraduateUnit class is a subclass of unit of student that holds UndergraduateUnit data and has a method that calculate overall marks and a method that determines the grade based on overall marks
+
 package Unit;
 
-public class UndergraduateUnit extends Unit {
+public class UndergraduateUnit extends Unit {   //Inheritance
     private String unitId;
     private int unitLevel, assignment1, assignment2, practicalWork, finalExam;
 
-    //Constructors
-    public UndergraduateUnit()
-    {
+    // Constructors
+    public UndergraduateUnit() {
         super();
     }
-    public UndergraduateUnit(String unitId, int unitLevel, int assignment1, int assignment2, int practicalWork, int finalExam)
-    {
+    public UndergraduateUnit(String unitId, int unitLevel, int assignment1, int assignment2, int practicalWork, int finalExam) {
         super('U');
         this.unitId = unitId;
         this.unitLevel = unitLevel;
@@ -20,89 +24,131 @@ public class UndergraduateUnit extends Unit {
         this.finalExam = finalExam;
     }
 
-    //Setter
-    public void SetUnitId(String unitId)
-    {
+    // Setter
+    /** 
+     * Sets UnitId of unit with given string
+     * @param unitId
+     */
+    public void SetUnitId(String unitId) {
         this.unitId = unitId;
     }
-    public void SetUnitLevel(int unitLevel)
-    {
+    /** 
+     * Sets unitLevel of unit with given int
+     * @param unitLevel
+     */
+    public void SetUnitLevel(int unitLevel) {
         this.unitLevel = unitLevel;
     }
-    public void SetAssignment1(int assignment1)
-    {
+    /** 
+     * Sets Assignment1 score of student with given int
+     * @param assignment1
+     */
+    public void SetAssignment1(int assignment1) {
         this.assignment1 = assignment1;
     }
-    public void SetAssignment2(int assignment2)
-    {
+    /** 
+     * Set assignment2 score of student with given int
+     * @param assignment2
+     */
+    public void SetAssignment2(int assignment2) {
         this.assignment2 = assignment2;
     }
-    public void SetPracticalWork(int practicalWork)
-    {
+    /** 
+     * Set practicalWork score of student with given int
+     * @param practicalWork
+     */
+    public void SetPracticalWork(int practicalWork) {
         this.practicalWork = practicalWork;
     }
-    public void SetFinalExam(int finalExam)
-    {
+    /** 
+     * Set fincalExame score of student with given int
+     * @param finalExam
+     */
+    public void SetFinalExam(int finalExam) {
         this.finalExam = finalExam;
     }
 
-    //Getter
-    public String GetUnitId()
-    {
+    // Getter
+    /** 
+     * Returns unitId of unit
+     * @return String
+     */
+    public String GetUnitId() {
         return unitId;
     }
-    public int GetUnitLevel()
-    {
+    /** 
+     * Returns unitLevel of unit
+     * @return int
+     */
+    public int GetUnitLevel() {
         return unitLevel;
     }
-    public int GetAssignment1()
-    {
+    /** 
+     * Return assignment1 of unit
+     * @return int
+     */
+    public int GetAssignment1() {
         return assignment1;
     }
-    public int GetAssignment2()
-    {
+    /** 
+     * Return assignment2 of unit
+     * @return int
+     */
+    public int GetAssignment2() {
         return assignment2;
     }
-    public int GetPracticalWork()
-    {
+    /** 
+     * Returns PracticalWork of unit
+     * @return int
+     */
+    public int GetPracticalWork() {
         return practicalWork;
     }
-    public int GetFinalExam()
-    {
+    /** 
+     * Returns finalExam of unit
+     * @return int
+     */
+    public int GetFinalExam() {
         return finalExam;
     }
 
-    //Other method
-    public double CalOverallMark()
-    {
+    // Other method
+    /** 
+     * A method that will calculate overallMark based on the weighted average of assignment1,assignment2, practicalWork and finalExam and returns a double
+     * 25% each for assignment1 and assignment2
+     * 20% for practicalWork
+     * 30% for finalExam
+     * @return double
+     */
+    public double CalOverallMark() {
         double overallMark;
 
-        overallMark = (assignment1/4) + (assignment2/4) + (practicalWork/5) + (finalExam*0.3);
+        overallMark = (assignment1 / 4) + (assignment2 / 4) + (practicalWork / 5) + (finalExam * 0.3);
 
         return overallMark;
     }
 
-    public String CalFinalGrade()
-    {
+    
+    /** 
+     * A method that will determine the final grade based on overallMarks
+     * HD: 80 - 100
+     * D : 70 - 79
+     * C : 60 - 69
+     * P : 50 - 59
+     * N : 0  - 49
+     * @return String
+     */
+    public String CalFinalGrade() {
         double overallMark = CalOverallMark();
-        if(overallMark >= 80)
-        {
+        if (overallMark >= 80) {
             return "HD";
-        }
-        else if(overallMark >= 70 && overallMark < 80)
-        {
-             return "D";
-        }
-        else if(overallMark >= 60 && overallMark < 70)
-        {
+        } else if (overallMark >= 70 && overallMark < 80) {
+            return "D";
+        } else if (overallMark >= 60 && overallMark < 70) {
             return "C";
-        }
-        else if(overallMark >= 50 && overallMark < 60)
-        {
+        } else if (overallMark >= 50 && overallMark < 60) {
             return "P";
-        }
-        else
-        {
+        } else {
             return "N";
         }
     }
