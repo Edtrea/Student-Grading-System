@@ -1,3 +1,5 @@
 EnrolmentType,StudentID,UnitID,UnitLevel,Assignment1,Assignment2,PracticalWork,FinalExam,GradEnrolType,GradYears,GradFinalGrade
-U,1001,ICT167,1,80,75,18,60,,,
-G,1002,,,,,,,Master,4,N
+U,2701,ICT167,1,60,75,17,70,,,
+U,2001,ICT167,1,43,86,13,80,,,
+U,3001,ICT167,1,78,89,11,77,,,
+G,2702,,,,,,,Master,4,N

@@ -1,3 +1,14 @@
 EnrolmentType,StudentID,FirstName,LastName,BirthDay,BirthMonth,BirthYear
-U,1001,test,1,4,2,2012
-G,1002,testing,2,12,8,2005
+U,1001,student,one,4,2,2012
+U,2001,student,two,12,8,2005
+U,3001,student,three,21,5,2003
+U,4001,student,four,21,5,2003
+U,5001,student,five,21,5,2003
+G,6001,student,Six,21,3,2003
+G,7001,student,Seven,21,5,2004
+G,8001,student,Eight,21,5,2003
+G,9001,student,Nine,12,6,2002
+G,9002,student,Nine,12,6,2002
+U,2701,student,ten,8,5,2000
+G,2702,student,eleven,8,3,2001
+U,1000,student,twelve,29,4,2004
